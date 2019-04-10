@@ -1,20 +1,21 @@
-import logging, io, os
+import logging
 
 from django.http import HttpResponseBadRequest
-
+from django.http.response import JsonResponse
+from django.views import View
 from google.cloud import speech
 from google.cloud.speech import types
 
-from base_app.utils.json import Json
-
 logger = logging.getLogger(__name__)
 
-class SpeechToText(Json):
+
+class Speech(View):
+
     def post(self, request):
 
-        if not 'lang' in request.POST:
+        if 'lang' not in request.POST:
             return HttpResponseBadRequest('Please provide language code.')
-        if not 'file' in request.FILES:
+        if 'file' not in request.FILES:
             return HttpResponseBadRequest('Please provide audio file.')
 
         # Instantiates a client
@@ -36,7 +37,7 @@ class SpeechToText(Json):
             confidence = result.alternatives[0].confidence
 
         logger.info('SpeechToText: ' + text)
-        return dict(
-            transcript=text,
-            confidence=confidence
-        )
+        return JsonResponse({
+            'transcript': text,
+            'confidence': confidence
+        })

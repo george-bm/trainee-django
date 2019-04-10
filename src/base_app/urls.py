@@ -1,9 +1,9 @@
-from django.conf.urls import url
-from django.views.decorators.csrf import csrf_exempt
+from django.urls import path
 
-from base_app import views
+from src.base_app import views
+from src.speech.views import Speech
 
 urlpatterns = [
-    url('health', views.HeartBeatHealthCheck.as_view(), name='common_healthcheck'),
-    url('speechtotext', csrf_exempt(views.SpeechToText.as_view()), name='common_speechtotext'),
+    path('health', views.HeartBeatHealthCheck.as_view(), name='common_healthcheck'),
+    path('speech', Speech.as_view(), name='common_speech'),
 ]

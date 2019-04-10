@@ -1,13 +1,15 @@
 import logging
 
-from base_app.utils.json import Json
+from django.http.response import JsonResponse
+from django.views import View
 
 logger = logging.getLogger(__name__)
 
 
-class HeartBeatHealthCheck(Json):
+class HeartBeatHealthCheck(View):
     def get(self, request):
         logger.info('Common Health: OK')
-        return dict(
-            result='CommonOK'
-        )
+
+        return JsonResponse({
+            'result': 'CommonOK',
+        })
