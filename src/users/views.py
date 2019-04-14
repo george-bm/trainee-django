@@ -32,7 +32,7 @@ class Speech(View):
             encoding='FLAC',
             language_code=request.POST['lang'])
 
-        # Detects speech in the audio file
+        # Detects users in the audio file
         response = client.recognize(config, audio)
         for result in response.results:
             text = result.alternatives[0].transcript
