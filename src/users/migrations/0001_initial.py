@@ -41,16 +41,16 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='message',
             name='user',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='speech.User'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='auth.User'),
         ),
         migrations.AddField(
             model_name='follower',
             name='follow',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='follow', to='speech.User'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='follow', to='auth.User'),
         ),
         migrations.AddField(
             model_name='follower',
             name='user',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='user', to='speech.User'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='user', to='auth.User'),
         ),
     ]
