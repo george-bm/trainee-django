@@ -1,5 +1,7 @@
+import hashlib
 import logging
 
+import settings
 from django.http import HttpResponseBadRequest, HttpResponse
 from django.http import JsonResponse
 from django.views import View
@@ -19,10 +21,11 @@ class Users(View):
             return HttpResponseBadRequest('Please provide language_code.')
         if User.objects.filter(login=request.POST['login']).exists():
             return HttpResponseBadRequest('User already exist.')
-
+        password = request.POST['password']
+        salt = settings.SALT
         User.objects.create(
             login=request.POST['login'],
-            password=request.POST['password'],
+            password=hashlib.md5((salt + password).encode('utf-8')).hexdigest(),
             lang=request.POST['lang']
         )
         return HttpResponse('User Added Successfully')
