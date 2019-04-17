@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class SpeechConfig(AppConfig):
+class UsersConfig(AppConfig):
     name = 'users'
