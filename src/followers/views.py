@@ -1,8 +1,12 @@
+import logging
+
 from django.http import HttpResponseBadRequest, HttpResponse
 from django.views import View
 from users.models import User
 
 from .models import Follower
+
+logger = logging.getLogger(__name__)
 
 
 class Follow(View):
@@ -28,3 +32,10 @@ class Follow(View):
             follow_id=follow_id,
         )
         return HttpResponse('Followed Successfully')
+
+    def delete(self, request, user_id, follow_id):
+        if not Follower.objects.filter(user_id=user_id, follow_id=follow_id).exists():
+            return HttpResponseBadRequest('No such follow')
+
+        Follower.objects.filter(user_id=user_id, follow_id=follow_id).delete()
+        return HttpResponse('Unfollowed Successfully')
