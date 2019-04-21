@@ -18,10 +18,12 @@ class Message(View):
             return HttpResponseBadRequest('Please provide user_id.')
         if 'text' not in request.POST:
             return HttpResponseBadRequest('Please provide text.')
+        if 'file' not in request.FILES:
+            return HttpResponseBadRequest('Please provide file.')
 
         ext = os.path.splitext(request.FILES['file'].name)[1]
         if not ext.lower() in settings.VALID_EXTENSIONS:
-            return HttpResponse('Unsupported file extension.')
+            return HttpResponseBadRequest('Unsupported file extension.')
 
         user_id = request.POST['user_id']
         text = request.POST['text']
