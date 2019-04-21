@@ -44,3 +44,11 @@ class Message(View):
             return HttpResponse('Value error')
         except IntegrityError:
             return HttpResponse('Integrity Error')
+
+
+    def delete(self, request, id):
+        if not MessageModel.objects.filter(id=id).exists():
+            return HttpResponseBadRequest('No such message.')
+        MessageModel.objects.filter(id=id).delete()
+        return HttpResponse('Message Deleted Successfully')
+
