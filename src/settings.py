@@ -20,8 +20,14 @@ load_dotenv(dotenv_path)
 
 SALT = '042d13D9d3'
 
+VALID_EXTENSIONS = ['.flac']
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+MEDIA_URL = '/media/'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
@@ -48,6 +54,7 @@ INSTALLED_APPS = [
     'base_app',
     'users',
     'followers',
+    'message',
 ]
 
 MIDDLEWARE = [
