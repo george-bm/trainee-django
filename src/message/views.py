@@ -1,11 +1,12 @@
 import logging
+import os
 
-from django.http import HttpResponseBadRequest, HttpResponse
+import settings
 from django.db import IntegrityError
+from django.http import HttpResponseBadRequest, HttpResponse
+from django.http import JsonResponse
 from django.views import View
 from users.models import User
-import os
-import settings
 
 from .models import Message as MessageModel
 
@@ -47,10 +48,12 @@ class Message(View):
         except IntegrityError:
             return HttpResponse('Integrity Error')
 
-
     def delete(self, request, id):
         if not MessageModel.objects.filter(id=id).exists():
             return HttpResponseBadRequest('No such message.')
         MessageModel.objects.filter(id=id).delete()
         return HttpResponse('Message Deleted Successfully')
 
+    def get(self, request):
+        messages = list(MessageModel.objects.all().values_list('id', 'text', 'file'))
+        return JsonResponse({'messages': messages})
