@@ -1,28 +1,29 @@
 # trainee-django
-## Homework 1
-Распознание текста из аудиофайла<br>
-### Установка
+## Установка
 - Требуется установленный Python 3.
 - Скачать файлы проекта в папку проекта.
 - Установить зависимости:
 ```
 pip install -r config\requirements.txt
 ```
-### Настройка сервисного аккаунта
-Для распознания текста сервис использует Google Cloud Speech-To-Text API
-- Создать проект на https://console.cloud.google.com
-- Включить Google Speech-to-Text API для этого проекта на https://cloud.google.com/speech-to-text/docs/quickstart-client-libraries
-- Создать сервисный аккаунт на https://console.cloud.google.com/iam-admin/serviceaccounts
-- Сохранить ключ json
-- Объявить переменную среды GOOGLE_APPLICATION_CREDENTIALS. В качестве значение путь к файлу ключа json.
-```
-Windows
-set GOOGLE_APPLICATION_CREDENTIALS=[PATH]
-Linux or macOS
-export GOOGLE_APPLICATION_CREDENTIALS="[PATH]"
- ```
- - Установить Google SDK https://cloud.google.com/sdk/docs/
- 
+## Реализованные функции:
+- Регистрация пользователя
+- Получение JWT токена пользователя
+- Подписаться
+- Отписаться
+- Добавить сообщение
+- Удалить сообщение
+- Список сообщений
 
-
-
+## Не реализованные функции
+- Удаления учетной записи пользователя
+- Аунтификация и авторизация  по токенц JWT
+- Запрос публичного ключа
+- Оповещение о новой подписке по email
+- Поиск пользователя по логину
+- Оповещение о новых сообщениях
+- Просмотр ленты сообщений
+- Пагинация
+- Динамическая подгрузка ленты
+- Просмотр страницы пользователя
+- Sentry
