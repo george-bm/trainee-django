@@ -1,7 +1,8 @@
-from django.urls import path, re_path
+from django.urls import path, include
+from rest_framework_jwt.views import obtain_jwt_token
 from users.views import Users
 
 urlpatterns = [
     path('users', Users.as_view(), name='common_users'),
-    re_path('users/(\w+)', Users.as_view(), name='common_delete_user')
+    path('token', obtain_jwt_token),
 ]

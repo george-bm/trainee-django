@@ -6,7 +6,7 @@ from django.db import IntegrityError
 from django.http import HttpResponseBadRequest, HttpResponse
 from django.http import JsonResponse
 from django.views import View
-from users.models import User
+from django.contrib.auth.models import User
 
 from .models import Message as MessageModel
 

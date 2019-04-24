@@ -2,7 +2,7 @@ import logging
 
 from django.http import HttpResponseBadRequest, HttpResponse
 from django.views import View
-from users.models import User
+from django.contrib.auth.models import User
 
 from .models import Follower
 
